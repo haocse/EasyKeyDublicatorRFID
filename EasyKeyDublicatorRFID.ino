@@ -420,11 +420,10 @@ void TxByteRfid(byte data){
 }
 
 void rfidGap(unsigned int tm){
-  TCCR2A &=0b00111111;                //Оключить ШИМ COM2A 
+  TCCR2A &= 0b00111111;              // Turn off COM2A PWM
   delayMicroseconds(tm);
-  TCCR2A |= _BV(COM2A0);              // Включить ШИМ COM2A (pin 11)      
+  TCCR2A |= _BV(COM2A0);            // Turn on COM2A PWM (pin 11)      
 }
-
 bool T5557_blockRead(byte* buf){
   byte ti; byte j = 0, k=0;
   for (int i = 0; i<33; i++){    // читаем стартовый 0 и 32 значащих bit
