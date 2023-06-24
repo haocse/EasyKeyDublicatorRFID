@@ -401,7 +401,7 @@ bool searchEM_Marine( bool copyKey = true){
   Serial.print(keyNum);
   Serial.println(") Type: EM-Marie ");
   
-  if (!copyKey) TCCR2A &=0b00111111;              //Оключить ШИМ COM2A (pin 11)
+  if (!copyKey) TCCR2A &=0b00111111;              // Disable PWM COM2A (pin 11)
   digitalWrite(G_Led, gr);
   return rez;
 }
