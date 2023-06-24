@@ -373,14 +373,14 @@ bool readEM_Marie(byte* buf){
 }
 
 void rfidACsetOn(){
-  //включаем генератор 125кГц
-  TCCR2A = _BV(COM2A0) | _BV(COM2B1) | _BV(WGM21) | _BV(WGM20);  //Вкючаем режим Toggle on Compare Match на COM2A (pin 11) и счет таймера2 до OCR2A
-  TCCR2B = _BV(WGM22) | _BV(CS20);                                // Задаем делитель для таймера2 = 1 (16 мГц)
-  OCR2A = 63;                                                    // 63 тактов на период. Частота на COM2A (pin 11) 16000/64/2 = 125 кГц, Скважнось COM2A в этом режиме всегда 50% 
-  OCR2B = 31;                                                     // Скважность COM2B 32/64 = 50%  Частота на COM2A (pin 3) 16000/64 = 250 кГц
-  // включаем компаратор
-  ADCSRB &= ~(1<<ACME);           // отключаем мультиплексор AC
-  ACSR &= ~(1<<ACBG);             // отключаем от входа Ain0 1.1V
+  // Turn on 125 kHz generator
+  TCCR2A = _BV(COM2A0) | _BV(COM2B1) | _BV(WGM21) | _BV(WGM20);  // Enable Toggle on Compare Match mode on COM2A (pin 11) and set timer2 to count to OCR2A
+  TCCR2B = _BV(WGM22) | _BV(CS20);                                // Set timer2 prescaler to 1 (16 MHz)
+  OCR2A = 63;                                                    // 63 clock cycles per period. Frequency on COM2A (pin 11) is 16000/64/2 = 125 kHz, COM2A duty cycle is always 50% in this mode
+  OCR2B = 31;                                                     // COM2B duty cycle is 32/64 = 50%, frequency on COM2B (pin 3) is 16000/64 = 250 kHz
+  // Turn on comparator
+  ADCSRB &= ~(1<<ACME);           // Disable AC multiplexer
+  ACSR &= ~(1<<ACBG);             // Disable 1.1V reference on Ain0 input
 }
 
 bool searchEM_Marine( bool copyKey = true){
