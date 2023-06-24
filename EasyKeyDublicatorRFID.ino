@@ -386,8 +386,8 @@ void rfidACsetOn(){
 bool searchEM_Marine( bool copyKey = true){
   byte gr = digitalRead(G_Led);
   bool rez = false;
-  rfidACsetOn();            // включаем генератор 125кГц и компаратор
-  delay(13);                //13 мс длятся переходные прцессы детектора 
+  rfidACsetOn();            // turn on the 125kHz generator and comparator
+  delay(13);                // 13 ms last detector transients
   if (!readEM_Marie(addr)) {if (!copyKey) TCCR2A &=0b00111111; digitalWrite(G_Led, gr); return rez;};
   rez = true;
   keyType = keyEM_Marie;
